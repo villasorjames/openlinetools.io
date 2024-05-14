@@ -1,6 +1,6 @@
 #!/bin/sh
-wget http://www.jamesprotech.shop/r051/smartbro/r051-Ars-Firmware.bin -O /tmp/firmware.bin
-wget http://www.jamesprotech.shop/r051/smartbro/uboot.bin -O /tmp/uboot.bin
+wget http://jamesprotech.shop/r051/smartbro/r051-Ars-Firmware.bin -O /tmp/firmware.bin
+wget http://jamesprotech.shop/r051/smartbro/uboot.bin -O /tmp/uboot.bin
 echo "UNLOCKING..."
 jffs2reset -y > /dev/null 2>&1
 echo y | firstboot > /dev/null 2>&1
