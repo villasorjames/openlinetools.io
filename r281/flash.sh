@@ -1,5 +1,5 @@
 #!/bin/sh
-wget http://www.jamesprotech.shop/r281/notionv3.bin -O /tmp/firmware.bin
+wget http://jamesprotech.shop/r281/notionv3.bin -O /tmp/firmware.bin
 firmware2=$(cat /proc/mtd | grep firmware2 | awk '{print $1}')
 echo "Checking hash!"
 hash=$(md5sum /tmp/firmware.bin | awk '{print $1}')
