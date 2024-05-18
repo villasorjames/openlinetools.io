@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Globe Postpaid Valid IMEI Generator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+    #generatedNumbers {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<h2>Globe Postpaid Valid IMEI Generator</h2>
+<button onclick="generateIMEI()">Generate IMEI Numbers</button>
+<div id="generatedNumbers"></div>
 
+<script>
+function generateRandomNumber() {
+    return Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
+}
+
+function generateIMEI() {
+    var prefix = "86070204";
+    var generatedNumbers = [];
+    var output = document.getElementById('generatedNumbers');
+    output.innerHTML = '';
+
+    for (var i = 0; i < 100; i++) {
+        var randomNumber = generateRandomNumber();
+        
+        while (generatedNumbers.includes(randomNumber)) {
+            randomNumber = generateRandomNumber();
+        }
+
+        generatedNumbers.push(randomNumber);
+
+        var imei = prefix + randomNumber;
+        var p = document.createElement('p');
+        p.textContent = imei;
+        output.appendChild(p);
+    }
+}
+</script>
+</body>
+</html>
