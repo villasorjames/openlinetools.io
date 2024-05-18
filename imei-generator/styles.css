@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+#imeiList {
+    margin: 20px auto;
+    width: 80%;
+}
+
+#imeiList div {
+    margin-bottom: 5px;
+}
