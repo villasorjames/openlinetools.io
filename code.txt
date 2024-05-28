@@ -1,0 +1,165 @@
+FORMULA 
+
+wt = tat - bt
+tat = bt - wt 
+wr = st - at
+
+### 1. FCFS (First-Come, First-Served)
+
+**Gantt Chart:**
+
+```
+| P1 | P2 | P3 | P4 |
+0    20   30   45   75
+```
+
+**Calculations:**
+
+| Process | AT | BT | ST | CT | TAT  | WT  |
+|---------|----|----|----|----|------|-----|
+| P1      | 0  | 20 | 0  | 20 | 20   | 0   |
+| P2      | 2  | 10 | 20 | 30 | 28   | 18  |
+| P3      | 4  | 15 | 30 | 45 | 41   | 26  |
+| P4      | 6  | 30 | 45 | 75 | 69   | 39  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 2. SJF (Shortest Job First)
+
+**Gantt Chart:**
+
+```
+| P1 | P2 | P3 | P4 |
+0    20   30   45   75
+```
+
+Since in this specific set of processes, the order of execution by shortest job after arrival is the same as FCFS, the results are identical to FCFS.
+
+**Calculations:**
+
+| Process | AT | BT | ST | CT | TAT  | WT  |
+|---------|----|----|----|----|------|-----|
+| P1      | 0  | 20 | 0  | 20 | 20   | 0   |
+| P2      | 2  | 10 | 20 | 30 | 28   | 18  |
+| P3      | 4  | 15 | 30 | 45 | 41   | 26  |
+| P4      | 6  | 30 | 45 | 75 | 69   | 39  |
+
+
+
+
+
+
+
+
+
+### 3. Round Robin (Quantum = 10ms)
+
+**Gantt Chart:**
+
+```
+| P1 | P2 | P3 | P4 | P1 | P4 | P3 | P4 |
+0    10   20   30   40   50   60   65   75
+```
+
+**Step-by-Step Execution:**
+
+1. P1 runs from 0 to 10.
+2. P2 runs from 10 to 20.
+3. P3 runs from 20 to 30.
+4. P4 runs from 30 to 40.
+5. P1 runs from 40 to 50 (finishes).
+6. P4 runs from 50 to 60.
+7. P3 runs from 60 to 65 (finishes).
+8. P4 runs from 65 to 75 (finishes).
+
+**Calculations:**
+
+| Process | AT | BT | ST | CT | TAT  | WT  |
+|---------|----|----|----|----|------|-----|
+| P1      | 0  | 20 | 0  | 50 | 50   | 30  |
+| P2      | 2  | 10 | 10 | 20 | 18   | 8   |
+| P3      | 4  | 15 | 20 | 65 | 61   | 46  |
+| P4      | 6  | 30 | 30 | 75 | 69   | 39  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 4. LJF (Longest Job First)
+
+**Gantt Chart:**
+
+```
+| P1 | P4 | P3 | P2 |
+0    20   50   65   75
+```
+
+**Calculations:**
+
+| Process | AT | BT | ST | CT | TAT  | WT  |
+|---------|----|----|----|----|------|-----|
+| P1      | 0  | 20 | 0  | 20 | 20   | 0   |
+| P2      | 2  | 10 | 65 | 75 | 73   | 63  |
+| P3      | 4  | 15 | 50 | 65 | 61   | 46  |
+| P4      | 6  | 30 | 20 | 50 | 44   | 14  |
+
+I hope this detailed explanation and the Gantt charts help you understand the process flow and calculations for each scheduling algorithm!
