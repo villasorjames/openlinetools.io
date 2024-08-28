@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expression Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #000;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .section {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expression Converter</h1>
+
+    <!-- Postfix to Infix Converter -->
+    <div>
+        <h2>Postfix to Infix Converter</h2>
+        <label for="postfix">Enter Postfix:</label>
+        <input type="text" id="postfix" value="L F R - / O R * W D / - +">
+        <button onclick="convertPostfix()">Convert</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Stack Content</th>
+                    <th>Current Token</th>
+                    <th>Intermediate Infix</th>
+                </tr>
+            </thead>
+            <tbody id="postfix-steps">
+                <!-- Steps will be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Infix to Postfix Converter -->
+    <div class="section">
+        <h2>Infix to Postfix Converter</h2>
+        <label for="infix">Enter Infix:</label>
+        <input type="text" id="infix" value="L/(F-R)+(O*R-(W/D))">
+        <button onclick="convertInfix()">Convert</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tokens</th>
+                    <th>Operation</th>
+                    <th>Stacks</th>
+                </tr>
+            </thead>
+            <tbody id="infix-steps">
+                <!-- Steps will be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Postfix to Infix Converter
+        function convertPostfix() {
+            const postfix = document.getElementById('postfix').value;
+            const steps = document.getElementById('postfix-steps');
+
+            // Tokenize the postfix expression
+            const tokens = postfix.split(/\s+/);
+            const stack = [];
+            let tableRows = '';
+            
+            tokens.forEach(token => {
+                if (/[A-Z]/.test(token)) {
+                    stack.push(token);
+                } else if (/[+\-*/]/.test(token)) {
+                    const right = stack.pop();
+                    const left = stack.pop();
+                    const infix = `(${left} ${token} ${right})`;
+                    stack.push(infix);
+                }
+
+                // Update the table rows
+                tableRows += `<tr>
+                    <td>${stack.join(' ')}</td>
+                    <td>${token}</td>
+                    <td>${stack[stack.length - 1] || ''}</td>
+                </tr>`;
+            });
+
+            steps.innerHTML = tableRows;
+        }
+
+        // Infix to Postfix Converter
+        function convertInfix() {
+            const infix = document.getElementById('infix').value;
+            const steps = document.getElementById('infix-steps');
+
+            // Tokenize the infix expression
+            const tokens = infix.match(/([A-Z]|\S)/g);
+            const precedence = {'+': 1, '-': 1, '*': 2, '/': 2};
+            const output = [];
+            const opStack = [];
+
+            let tableRows = '';
+            let currentTokens = [];
+            let currentOps = [];
+            let currentStacks = [];
+
+            tokens.forEach(token => {
+                if (/[A-Z]/.test(token)) {
+                    output.push(token);
+                    currentTokens.push(token);
+                } else if (token === '(') {
+                    opStack.push(token);
+                    currentOps.push('push - (');
+                } else if (token === ')') {
+                    while (opStack.length && opStack[opStack.length - 1] !== '(') {
+                        output.push(opStack.pop());
+                    }
+                    opStack.pop(); // Pop the '('
+                    currentOps.push('pop - )');
+                } else if (/[+\-*/]/.test(token)) {
+                    while (opStack.length && precedence[opStack[opStack.length - 1]] >= precedence[token]) {
+                        output.push(opStack.pop());
+                    }
+                    opStack.push(token);
+                    currentOps.push(`push - ${token}`);
+                }
+
+                currentStacks = `Output: ${output.join(' ')} | Stack: ${opStack.join(' ')}`;
+                tableRows += `<tr>
+                    <td>${currentTokens.join(' ')}</td>
+                    <td>${currentOps.join(' ')}</td>
+                    <td>${currentStacks}</td>
+                </tr>`;
+            });
+
+            // Empty remaining operators
+            while (opStack.length) {
+                output.push(opStack.pop());
+            }
+            currentStacks = `Output: ${output.join(' ')} | Stack: ${opStack.join(' ')}`;
+            tableRows += `<tr>
+                <td>${tokens.join(' ')}</td>
+                <td>${currentOps.join(' ')}</td>
+                <td>${currentStacks}</td>
+            </tr>`;
+
+            steps.innerHTML = tableRows;
+        }
+    </script>
+</body>
+</html>
