@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RGBA Color Picker</title>
+<title>RGBA Color Picker with Copy Button</title>
 <style>
   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
-  
+
   body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -48,6 +48,7 @@
     justify-content: center;
     font-size: 1em;
     color: #333;
+    position: relative;
   }
 
   .color-picker {
@@ -73,6 +74,29 @@
     width: 70%;
     margin: 0 5px;
   }
+
+  .copy-button {
+    margin-top: 10px;
+    padding: 8px 20px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .copy-button:hover {
+    background-color: #45a049;
+  }
+
+  .copied-message {
+    color: #4CAF50;
+    font-size: 0.85em;
+    display: none;
+    margin-top: 10px;
+  }
 </style>
 </head>
 <body>
@@ -82,6 +106,9 @@
     <div class="color-box" id="colorBox">
       background-color: rgba(255, 255, 255, 0.2);
     </div>
+
+    <button class="copy-button" onclick="copyToClipboard()">Copy</button>
+    <div id="copiedMessage" class="copied-message">Copied!</div>
 
     <div class="color-picker">
       <div class="slider-group">
@@ -112,6 +139,7 @@
   const greenSlider = document.getElementById('green');
   const blueSlider = document.getElementById('blue');
   const alphaSlider = document.getElementById('alpha');
+  const copiedMessage = document.getElementById('copiedMessage');
 
   function updateColor() {
     const r = redSlider.value;
@@ -122,6 +150,16 @@
 
     colorBox.style.backgroundColor = rgbaColor;
     colorBox.textContent = `background-color: ${rgbaColor};`;
+  }
+
+  function copyToClipboard() {
+    const colorText = colorBox.textContent;
+    navigator.clipboard.writeText(colorText).then(() => {
+      copiedMessage.style.display = 'block';
+      setTimeout(() => {
+        copiedMessage.style.display = 'none';
+      }, 1500);
+    });
   }
 
   redSlider.addEventListener('input', updateColor);
