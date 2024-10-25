@@ -5,64 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RGBA Color Picker</title>
 <style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
   body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
   }
 
   .container {
-    margin-top: 50px;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
   }
 
-  .color-picker {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+  h1 {
+    color: #333;
+    font-size: 1.5em;
     margin-bottom: 20px;
   }
 
   .color-box {
-    width: 300px;
+    width: 100%;
     height: 150px;
+    margin: 20px 0;
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid #ccc;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2em;
+    font-size: 1em;
     color: #333;
   }
 
+  .color-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .slider-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1em;
+    padding: 5px 0;
+  }
+
   .label {
-    font-size: 1.1em;
-    margin-right: 10px;
+    width: 15%;
+    color: #555;
   }
 
   input[type="range"] {
-    width: 150px;
+    width: 70%;
+    margin: 0 5px;
   }
 </style>
 </head>
 <body>
   <div class="container">
     <h1>RGBA Color Picker</h1>
-    <div class="color-picker">
-      <div class="label">R:</div>
-      <input type="range" id="red" min="0" max="255" value="255">
-      
-      <div class="label">G:</div>
-      <input type="range" id="green" min="0" max="255" value="255">
-      
-      <div class="label">B:</div>
-      <input type="range" id="blue" min="0" max="255" value="255">
-      
-      <div class="label">A:</div>
-      <input type="range" id="alpha" min="0" max="1" step="0.01" value="0.2">
-    </div>
 
     <div class="color-box" id="colorBox">
       background-color: rgba(255, 255, 255, 0.2);
+    </div>
+
+    <div class="color-picker">
+      <div class="slider-group">
+        <span class="label">R:</span>
+        <input type="range" id="red" min="0" max="255" value="255">
+      </div>
+      
+      <div class="slider-group">
+        <span class="label">G:</span>
+        <input type="range" id="green" min="0" max="255" value="255">
+      </div>
+
+      <div class="slider-group">
+        <span class="label">B:</span>
+        <input type="range" id="blue" min="0" max="255" value="255">
+      </div>
+
+      <div class="slider-group">
+        <span class="label">A:</span>
+        <input type="range" id="alpha" min="0" max="1" step="0.01" value="0.2">
+      </div>
     </div>
   </div>
 
