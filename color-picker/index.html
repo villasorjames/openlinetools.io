@@ -3,64 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transparent Color Picker</title>
+    <title>Color Picker with Transparency</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            background-color: #eaeaea;
+            font-family: 'Arial', sans-serif;
         }
 
-        .container {
+        .color-picker-container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
             text-align: center;
+            width: 300px;
         }
 
-        .color-preview {
-            width: 200px;
-            height: 200px;
-            margin-bottom: 20px;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        input[type="color"],
-        input[type="range"] {
-            margin: 10px 0;
+        input[type="color"] {
+            width: 100%;
+            height: 50px;
+            border: none;
             cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .color-display {
+            width: 100%;
+            height: 150px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        h2 {
+            margin: 0 0 15px 0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="color-preview" id="colorPreview"></div>
+    <div class="color-picker-container">
+        <h2>Choose Color & Opacity</h2>
         <input type="color" id="colorPicker" value="#ffffff">
-        <input type="range" id="opacitySlider" min="0" max="100" value="100">
-        <label for="opacitySlider">Opacity (%)</label>
+        <label for="opacityPicker">Opacity:</label>
+        <input type="range" id="opacityPicker" min="0" max="1" step="0.01" value="0.2">
+        <div id="colorDisplay" class="color-display"></div>
     </div>
     <script>
         const colorPicker = document.getElementById('colorPicker');
-        const opacitySlider = document.getElementById('opacitySlider');
-        const colorPreview = document.getElementById('colorPreview');
+        const opacityPicker = document.getElementById('opacityPicker');
+        const colorDisplay = document.getElementById('colorDisplay');
 
-        function updateColorPreview() {
+        function updateColorDisplay() {
             const color = colorPicker.value;
-            const opacity = opacitySlider.value / 100;
-            colorPreview.style.backgroundColor = `${color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`;
+            const opacity = opacityPicker.value;
+            colorDisplay.style.backgroundColor = color + opacityToHex(opacity);
         }
 
-        colorPicker.addEventListener('input', updateColorPreview);
-        opacitySlider.addEventListener('input', updateColorPreview);
+        function opacityToHex(opacity) {
+            const hexOpacity = Math.round(opacity * 255).toString(16).padStart(2, '0');
+            return hexOpacity;
+        }
 
-        // Initialize preview
-        updateColorPreview();
+        colorPicker.addEventListener('input', updateColorDisplay);
+        opacityPicker.addEventListener('input', updateColorDisplay);
+
+        // Initialize display
+        updateColorDisplay();
     </script>
 </body>
 </html>
