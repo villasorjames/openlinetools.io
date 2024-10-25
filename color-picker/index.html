@@ -1,83 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Picker with Transparency</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #eaeaea;
-            font-family: 'Arial', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGBA Color Picker</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+  }
 
-        .color-picker-container {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            text-align: center;
-            width: 300px;
-        }
+  .container {
+    margin-top: 50px;
+  }
 
-        input[type="color"] {
-            width: 100%;
-            height: 50px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
+  .color-picker {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
 
-        input[type="range"] {
-            width: 100%;
-        }
+  .color-box {
+    width: 300px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    color: #333;
+  }
 
-        .color-display {
-            width: 100%;
-            height: 150px;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+  .label {
+    font-size: 1.1em;
+    margin-right: 10px;
+  }
 
-        h2 {
-            margin: 0 0 15px 0;
-        }
-    </style>
+  input[type="range"] {
+    width: 150px;
+  }
+</style>
 </head>
 <body>
-    <div class="color-picker-container">
-        <h2>Choose Color & Opacity</h2>
-        <input type="color" id="colorPicker" value="#ffffff">
-        <label for="opacityPicker">Opacity:</label>
-        <input type="range" id="opacityPicker" min="0" max="1" step="0.01" value="0.2">
-        <div id="colorDisplay" class="color-display"></div>
+  <div class="container">
+    <h1>RGBA Color Picker</h1>
+    <div class="color-picker">
+      <div class="label">R:</div>
+      <input type="range" id="red" min="0" max="255" value="255">
+      
+      <div class="label">G:</div>
+      <input type="range" id="green" min="0" max="255" value="255">
+      
+      <div class="label">B:</div>
+      <input type="range" id="blue" min="0" max="255" value="255">
+      
+      <div class="label">A:</div>
+      <input type="range" id="alpha" min="0" max="1" step="0.01" value="0.2">
     </div>
-    <script>
-        const colorPicker = document.getElementById('colorPicker');
-        const opacityPicker = document.getElementById('opacityPicker');
-        const colorDisplay = document.getElementById('colorDisplay');
 
-        function updateColorDisplay() {
-            const color = colorPicker.value;
-            const opacity = opacityPicker.value;
-            colorDisplay.style.backgroundColor = color + opacityToHex(opacity);
-        }
+    <div class="color-box" id="colorBox">
+      background-color: rgba(255, 255, 255, 0.2);
+    </div>
+  </div>
 
-        function opacityToHex(opacity) {
-            const hexOpacity = Math.round(opacity * 255).toString(16).padStart(2, '0');
-            return hexOpacity;
-        }
+<script>
+  const colorBox = document.getElementById('colorBox');
+  const redSlider = document.getElementById('red');
+  const greenSlider = document.getElementById('green');
+  const blueSlider = document.getElementById('blue');
+  const alphaSlider = document.getElementById('alpha');
 
-        colorPicker.addEventListener('input', updateColorDisplay);
-        opacityPicker.addEventListener('input', updateColorDisplay);
+  function updateColor() {
+    const r = redSlider.value;
+    const g = greenSlider.value;
+    const b = blueSlider.value;
+    const a = alphaSlider.value;
+    const rgbaColor = `rgba(${r}, ${g}, ${b}, ${a})`;
 
-        // Initialize display
-        updateColorDisplay();
-    </script>
+    colorBox.style.backgroundColor = rgbaColor;
+    colorBox.textContent = `background-color: ${rgbaColor};`;
+  }
+
+  redSlider.addEventListener('input', updateColor);
+  greenSlider.addEventListener('input', updateColor);
+  blueSlider.addEventListener('input', updateColor);
+  alphaSlider.addEventListener('input', updateColor);
+
+  // Initialize color
+  updateColor();
+</script>
 </body>
 </html>
