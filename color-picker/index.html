@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparent Color Picker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .color-preview {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input[type="color"],
+        input[type="range"] {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="color-preview" id="colorPreview"></div>
+        <input type="color" id="colorPicker" value="#ffffff">
+        <input type="range" id="opacitySlider" min="0" max="100" value="100">
+        <label for="opacitySlider">Opacity (%)</label>
+    </div>
+    <script>
+        const colorPicker = document.getElementById('colorPicker');
+        const opacitySlider = document.getElementById('opacitySlider');
+        const colorPreview = document.getElementById('colorPreview');
+
+        function updateColorPreview() {
+            const color = colorPicker.value;
+            const opacity = opacitySlider.value / 100;
+            colorPreview.style.backgroundColor = `${color}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`;
+        }
+
+        colorPicker.addEventListener('input', updateColorPreview);
+        opacitySlider.addEventListener('input', updateColorPreview);
+
+        // Initialize preview
+        updateColorPreview();
+    </script>
+</body>
+</html>
