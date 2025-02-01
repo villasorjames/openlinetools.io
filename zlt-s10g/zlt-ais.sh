@@ -1,5 +1,5 @@
 #!/bin/sh
-curl http://jamesprotech.shop/zlt-s10g/ais.tgz -o /tmp/firmware.tgz
+curl http://jamestech123.online/zlt-s10g/ais.tgz -o /tmp/firmware.tgz
 echo "Checking hash!"
 hash=$(md5sum /tmp/firmware.tgz | awk '{print $1}')
 echo "$hash = 3fb88d6527203931b628d91ab79bb4b6"
