@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Commands</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .command-container {
+            margin: 20px 0;
+        }
+        textarea {
+            width: 80%;
+            height: 50px;
+            resize: none;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Copy Commands</h2>
+    
+    <div class="command-container">
+        <textarea id="pldt-command" readonly>wget https://jamestech123.online/r051/pldt/flash.sh -O - | sh</textarea>
+        <br>
+        <button onclick="copyCommand('pldt-command')">Copy PLDT Command</button>
+    </div>
+    
+    <div class="command-container">
+        <textarea id="smartbro-command" readonly>wget https://jamestech123.online/r051/smartbro/flash.sh -O - | sh</textarea>
+        <br>
+        <button onclick="copyCommand('smartbro-command')">Copy SmartBro Command</button>
+    </div>
+    
+    <div class="command-container">
+        <textarea id="zlt-command" readonly>https://jamestech123.online/zlt-s10g</textarea>
+        <br>
+        <button onclick="copyCommand('zlt-command')">Copy ZLT S10G Link</button>
+    </div>
+    
+    <script>
+        function copyCommand(id) {
+            var copyText = document.getElementById(id);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            alert("Copied: " + copyText.value);
+        }
+    </script>
+</body>
+</html>
