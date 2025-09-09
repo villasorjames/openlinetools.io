@@ -12,7 +12,7 @@ echo "$hash = 2fd662527c2d39cd6ffd49a41bcb8049"
 if [ $hash == '2fd662527c2d39cd6ffd49a41bcb8049' ]
 then
     echo "File downloaded successfully!"
-    mtd -r write /tmp/uboot.bin u-boot
+    mtd -r write /tmp/uboot.bin bootloader
 else
     echo "File is corrupt or incomplete download!"
 fi
