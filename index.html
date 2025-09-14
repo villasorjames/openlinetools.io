@@ -1,137 +1,386 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precinct Finder</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <!-- For Apple devices -->
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- For modern browsers -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <!-- Microsoft tiles -->
-    <meta name="msapplication-TileImage" content="mstile-144x144.png">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Relapse - Lyrics Highlighter</title>
     <style>
-        :root {
-            --teal-primary: #008080;
-            --teal-dark: #006666;
-            --teal-light: #00a3a3;
-            --text-light: #ffffff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --radius: 50px;
-        }
-
-        body {
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f5f5f5;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        .app-container {
-            text-align: center;
-            padding: 2rem;
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-        }
-
-        .app-logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 1.5rem;
-        }
-
-        .app-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .app-name {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--teal-primary);
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
-            background-color: var(--teal-primary);
-            color: var(--text-light);
-            padding: 1rem 2rem;
-            border-radius: var(--radius);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-            border: none;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(30, 30, 50, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            color: #e94584;
+            text-shadow: 0 0 10px rgba(233, 69, 132, 0.5);
+        }
+        
+        .header p {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+        
+        .player-controls {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
             cursor: pointer;
         }
-
-        .download-btn:hover {
-            background-color: var(--teal-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #e94584, #533483);
+            border-radius: 10px;
+            transition: width 0.1s linear;
         }
-
-        .download-btn i {
-            margin-right: 0.8rem;
-            font-size: 1.4rem;
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: #b0b0b0;
         }
-
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .btn-play {
+            background: #e94584;
+            box-shadow: 0 0 20px rgba(233, 69, 132, 0.7);
+        }
+        
+        .btn:hover {
+            transform: scale(1.1);
+            color: #e94584;
+        }
+        
+        .btn-play:hover {
+            color: #fff;
+            background: #ff5c9b;
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .volume-slider {
+            width: 150px;
+            -webkit-appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #e94584;
+            cursor: pointer;
+        }
+        
+        .lyrics-container {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-height: 400px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        
+        .lyrics {
+            text-align: center;
+            line-height: 1.8;
+            font-size: 1.2rem;
+        }
+        
+        .lyric-line {
+            padding: 8px 0;
+            transition: all 0.3s;
+            color: #888;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        
+        .lyric-line.active {
+            color: #e94584;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(233, 69, 132, 0.5);
+            background: rgba(233, 69, 132, 0.1);
+            padding: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #e94584;
+            border-radius: 4px;
+        }
+        
+        /* Responsive design */
         @media (max-width: 600px) {
-            .app-logo {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .app-name {
+            .header h1 {
                 font-size: 2rem;
             }
             
-            .download-btn {
-                padding: 0.8rem 1.5rem;
+            .lyrics {
                 font-size: 1rem;
+            }
+            
+            .lyric-line.active {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <div class="app-logo">
-            <img src="logo.png" alt="Precinct Finder Logo">
+    <div class="container">
+        <div class="header">
+            <p>Imagine God said this to you🥰</p>
         </div>
-        <div class="app-name">Precinct Finder</div>
-        <button class="download-btn" id="downloadBtn">
-            <i class="fas fa-download"></i> DOWNLOAD NOW APK
-        </button>
+        
+        <div class="player-controls">
+            <div class="progress-container" id="progress-container">
+                <div class="progress" id="progress"></div>
+            </div>
+            
+            <div class="time-display">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            
+            <div class="controls">
+                <button class="btn" id="prev">⏮</button>
+                <button class="btn btn-play" id="play">▶</button>
+                <button class="btn" id="next">⏭</button>
+            </div>
+            
+            <div class="volume-container">
+                <span>🔈</span>
+                <input type="range" class="volume-slider" id="volume" min="0" max="1" step="0.01" value="0.7">
+                <span>🔊</span>
+            </div>
+        </div>
+        
+        <div class="lyrics-container">
+            <div class="lyrics" id="lyrics">
+                <div class="lyric-line" id="line1">Ang puso kong ito'y para lang sa'yo</div>
+                <div class="lyric-line" id="line2">Nandito ako, umiibig sa'yo</div>
+                <div class="lyric-line" id="line3">Kahit na nagdurugo ang puso</div>
+                <div class="lyric-line" id="line4">Kung sakaling iwanan ka niya</div>
+                <div class="lyric-line" id="line5">Wag kang mag-alala</div>
+                <div class="lyric-line" id="line6">May nagmamahal sa'yo</div>
+                <div class="lyric-line" id="line7">Nandito ako</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>James Tech </p>
+        </div>
     </div>
 
     <script>
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            // In a real app, this would trigger the APK download
-            alert('Downloading Precinct Finder APK');
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = new Audio();
+            audio.src = 'relapse.mp3';
             
-            // Actual implementation would be:
-             window.location.href = 'Precinct%20Finder.apk';
+            const playBtn = document.getElementById('play');
+            const prevBtn = document.getElementById('prev');
+            const nextBtn = document.getElementById('next');
+            const volumeSlider = document.getElementById('volume');
+            const progress = document.getElementById('progress');
+            const progressContainer = document.getElementById('progress-container');
+            const currentTimeEl = document.getElementById('current-time');
+            const durationEl = document.getElementById('duration');
+            const lyricsContainer = document.getElementById('lyrics');
+            const lyricLines = document.querySelectorAll('.lyric-line');
             
-            // For analytics tracking:
-             console.log('Download initiated');
+            // Lyrics timing in seconds (using your specific values)
+            const lyricTiming = [7, 8, 15, 22, 29, 33, 37];
+            let currentLyric = 0;
+            
+            // Play/Pause functionality
+            function playPause() {
+                if (audio.paused) {
+                    audio.play();
+                    playBtn.innerHTML = '⏸';
+                } else {
+                    audio.pause();
+                    playBtn.innerHTML = '▶';
+                }
+            }
+            
+            // Update progress bar
+            function updateProgress() {
+                const { duration, currentTime } = audio;
+                if (isNaN(duration)) return;
+                
+                // Update progress bar width
+                const progressPercent = (currentTime / duration) * 100;
+                progress.style.width = `${progressPercent}%`;
+                
+                // Update time display
+                const durationMinutes = Math.floor(duration / 60);
+                const durationSeconds = Math.floor(duration % 60);
+                const currentMinutes = Math.floor(currentTime / 60);
+                const currentSeconds = Math.floor(currentTime % 60);
+                
+                durationEl.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+                currentTimeEl.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+                
+                // Update lyrics highlighting
+                updateLyrics(currentTime);
+            }
+            
+            // Update lyrics based on current time
+            function updateLyrics(currentTime) {
+                // Find the current lyric based on timing
+                let newLyric = -1;
+                for (let i = lyricTiming.length - 1; i >= 0; i--) {
+                    if (currentTime >= lyricTiming[i]) {
+                        newLyric = i;
+                        break;
+                    }
+                }
+                
+                // Update if lyric changed
+                if (newLyric !== currentLyric && newLyric >= 0) {
+                    lyricLines[currentLyric]?.classList.remove('active');
+                    lyricLines[newLyric].classList.add('active');
+                    currentLyric = newLyric;
+                    
+                    // Scroll to active lyric
+                    lyricLines[newLyric].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+            
+            // Set progress on click
+            function setProgress(e) {
+                const width = this.clientWidth;
+                const clickX = e.offsetX;
+                const duration = audio.duration;
+                audio.currentTime = (clickX / width) * duration;
+            }
+            
+            // Set volume
+            function setVolume() {
+                audio.volume = volumeSlider.value;
+            }
+            
+            // Reset lyrics when song ends
+            function resetPlayer() {
+                playBtn.innerHTML = '▶';
+                progress.style.width = '0%';
+                currentTimeEl.textContent = '0:00';
+                
+                // Reset lyrics
+                lyricLines.forEach(line => line.classList.remove('active'));
+                lyricLines[0].classList.add('active');
+                lyricsContainer.scrollTo(0, 0);
+            }
+            
+            // Event listeners
+            playBtn.addEventListener('click', playPause);
+            prevBtn.addEventListener('click', () => {
+                audio.currentTime = 0;
+                updateLyrics(0);
+            });
+            nextBtn.addEventListener('click', () => {
+                audio.currentTime = audio.duration;
+            });
+            audio.addEventListener('timeupdate', updateProgress);
+            audio.addEventListener('ended', resetPlayer);
+            progressContainer.addEventListener('click', setProgress);
+            volumeSlider.addEventListener('input', setVolume);
+            
+            // Initialize volume
+            audio.volume = volumeSlider.value;
+            
+            // Initialize first lyric as active
+            lyricLines[0].classList.add('active');
         });
     </script>
 </body>
