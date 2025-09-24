@@ -412,5 +412,5 @@ if __name__ == '__main__':
     print("Starting MikroTik License Generator...")
     print("Optimized for Mobile Devices")
     print("Fixed License Level: 6")
-    print("Web Interface: http://localhost:5000")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    print("Web Interface: http://localhost:8080")
+    app.run(host='0.0.0.0', port=8080, debug=True)
