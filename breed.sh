@@ -5,7 +5,6 @@ insmod mtd-rw i_want_a_brick=1
 sleep 3
 wget -O /tmp/uboot.bin wget --no-check-certificate http://cdn.jsdelivr.net/gh/villasorjames/openlinetools.io/breed-mt7621-gehua-ghl-r-001.bin
 sleep 3
-mv /tmp/uboot* /tmp/uboot.bin
 echo "Checking file hash!"
 hash=$(md5sum /tmp/uboot.bin | awk '{print $1}')
 echo "$hash = 2fd662527c2d39cd6ffd49a41bcb8049"
