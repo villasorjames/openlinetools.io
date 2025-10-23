@@ -3,7 +3,7 @@ opkg update && opkg install kmod-mtd-rw
 sleep 3
 insmod mtd-rw i_want_a_brick=1
 sleep 3
-wget -O /tmp/uboot.bin wget --no-check-certificate http://cdn.jsdelivr.net/gh/villasorjames/openlinetools.io/breed-mt7621-gehua-ghl-r-001.bin
+wget -O /tmp/uboot.bin wget https://cdn.jsdelivr.net/gh/villasorjames/openlinetools.io/breed-mt7621-gehua-ghl-r-001.bin
 sleep 3
 echo "Checking file hash!"
 hash=$(md5sum /tmp/uboot.bin | awk '{print $1}')
