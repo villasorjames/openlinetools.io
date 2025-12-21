@@ -1,387 +1,356 @@
 <!DOCTYPE html>
-<html lang="tl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relapse - Lyrics Highlighter</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(30, 30, 50, 0.8);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-        }
-        
-        .header {
-            text-align: center;
-            padding: 25px;
-            background: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            color: #e94584;
-            text-shadow: 0 0 10px rgba(233, 69, 132, 0.5);
-        }
-        
-        .header p {
-            color: #b0b0b0;
-            font-size: 1.1rem;
-        }
-        
-        .player-controls {
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .progress-container {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .progress {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(to right, #e94584, #533483);
-            border-radius: 10px;
-            transition: width 0.1s linear;
-        }
-        
-        .time-display {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            color: #b0b0b0;
-        }
-        
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 20px;
-        }
-        
-        .btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .btn-play {
-            background: #e94584;
-            box-shadow: 0 0 20px rgba(233, 69, 132, 0.7);
-        }
-        
-        .btn:hover {
-            transform: scale(1.1);
-            color: #e94584;
-        }
-        
-        .btn-play:hover {
-            color: #fff;
-            background: #ff5c9b;
-        }
-        
-        .volume-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .volume-slider {
-            width: 150px;
-            -webkit-appearance: none;
-            height: 5px;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            outline: none;
-        }
-        
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #e94584;
-            cursor: pointer;
-        }
-        
-        .lyrics-container {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            max-height: 400px;
-            overflow-y: auto;
-            scroll-behavior: smooth;
-        }
-        
-        .lyrics {
-            text-align: center;
-            line-height: 1.8;
-            font-size: 1.2rem;
-        }
-        
-        .lyric-line {
-            padding: 8px 0;
-            transition: all 0.3s;
-            color: #888;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
-        
-        .lyric-line.active {
-            color: #e94584;
-            font-weight: bold;
-            font-size: 1.3rem;
-            text-shadow: 0 0 10px rgba(233, 69, 132, 0.5);
-            background: rgba(233, 69, 132, 0.1);
-            padding: 10px;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #b0b0b0;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #e94584;
-            border-radius: 4px;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .lyrics {
-                font-size: 1rem;
-            }
-            
-            .lyric-line.active {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+    <title>My Professional Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <p>Imagine God said this to you🥰</p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        
-        <div class="player-controls">
-            <div class="progress-container" id="progress-container">
-                <div class="progress" id="progress"></div>
-            </div>
-            
-            <div class="time-display">
-                <span id="current-time">0:00</span>
-                <span id="duration">0:00</span>
-            </div>
-            
-            <div class="controls">
-                <button class="btn" id="prev">⏮</button>
-                <button class="btn btn-play" id="play">▶</button>
-                <button class="btn" id="next">⏭</button>
-            </div>
-            
-            <div class="volume-container">
-                <span>🔈</span>
-                <input type="range" class="volume-slider" id="volume" min="0" max="1" step="0.01" value="0.7">
-                <span>🔊</span>
-            </div>
-        </div>
-        
-        <div class="lyrics-container">
-            <div class="lyrics" id="lyrics">
-                <div class="lyric-line" id="line1">Ang puso kong ito'y para lang sa'yo</div>
-                <div class="lyric-line" id="line2">Nandito ako, umiibig sa'yo</div>
-                <div class="lyric-line" id="line3">Kahit na nagdurugo ang puso</div>
-                <div class="lyric-line" id="line4">Kung sakaling iwanan ka niya</div>
-                <div class="lyric-line" id="line5">Wag kang mag-alala</div>
-                <div class="lyric-line" id="line6">May nagmamahal sa'yo</div>
-                <div class="lyric-line" id="line7">Nandito ako</div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>James Tech </p>
-        </div>
-    </div>
+    </nav>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const audio = new Audio();
-            audio.src = 'relapse.mp3';
-            
-            const playBtn = document.getElementById('play');
-            const prevBtn = document.getElementById('prev');
-            const nextBtn = document.getElementById('next');
-            const volumeSlider = document.getElementById('volume');
-            const progress = document.getElementById('progress');
-            const progressContainer = document.getElementById('progress-container');
-            const currentTimeEl = document.getElementById('current-time');
-            const durationEl = document.getElementById('duration');
-            const lyricsContainer = document.getElementById('lyrics');
-            const lyricLines = document.querySelectorAll('.lyric-line');
-            
-            // Lyrics timing in seconds (using your specific values)
-            const lyricTiming = [7, 8, 15, 22, 29, 33, 37];
-            let currentLyric = 0;
-            
-            // Play/Pause functionality
-            function playPause() {
-                if (audio.paused) {
-                    audio.play();
-                    playBtn.innerHTML = '⏸';
-                } else {
-                    audio.pause();
-                    playBtn.innerHTML = '▶';
-                }
-            }
-            
-            // Update progress bar
-            function updateProgress() {
-                const { duration, currentTime } = audio;
-                if (isNaN(duration)) return;
-                
-                // Update progress bar width
-                const progressPercent = (currentTime / duration) * 100;
-                progress.style.width = `${progressPercent}%`;
-                
-                // Update time display
-                const durationMinutes = Math.floor(duration / 60);
-                const durationSeconds = Math.floor(duration % 60);
-                const currentMinutes = Math.floor(currentTime / 60);
-                const currentSeconds = Math.floor(currentTime % 60);
-                
-                durationEl.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
-                currentTimeEl.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
-                
-                // Update lyrics highlighting
-                updateLyrics(currentTime);
-            }
-            
-            // Update lyrics based on current time
-            function updateLyrics(currentTime) {
-                // Find the current lyric based on timing
-                let newLyric = -1;
-                for (let i = lyricTiming.length - 1; i >= 0; i--) {
-                    if (currentTime >= lyricTiming[i]) {
-                        newLyric = i;
-                        break;
-                    }
-                }
-                
-                // Update if lyric changed
-                if (newLyric !== currentLyric && newLyric >= 0) {
-                    lyricLines[currentLyric]?.classList.remove('active');
-                    lyricLines[newLyric].classList.add('active');
-                    currentLyric = newLyric;
-                    
-                    // Scroll to active lyric
-                    lyricLines[newLyric].scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }
-            }
-            
-            // Set progress on click
-            function setProgress(e) {
-                const width = this.clientWidth;
-                const clickX = e.offsetX;
-                const duration = audio.duration;
-                audio.currentTime = (clickX / width) * duration;
-            }
-            
-            // Set volume
-            function setVolume() {
-                audio.volume = volumeSlider.value;
-            }
-            
-            // Reset lyrics when song ends
-            function resetPlayer() {
-                playBtn.innerHTML = '▶';
-                progress.style.width = '0%';
-                currentTimeEl.textContent = '0:00';
-                
-                // Reset lyrics
-                lyricLines.forEach(line => line.classList.remove('active'));
-                lyricLines[0].classList.add('active');
-                lyricsContainer.scrollTo(0, 0);
-            }
-            
-            // Event listeners
-            playBtn.addEventListener('click', playPause);
-            prevBtn.addEventListener('click', () => {
-                audio.currentTime = 0;
-                updateLyrics(0);
-            });
-            nextBtn.addEventListener('click', () => {
-                audio.currentTime = audio.duration;
-            });
-            audio.addEventListener('timeupdate', updateProgress);
-            audio.addEventListener('ended', resetPlayer);
-            progressContainer.addEventListener('click', setProgress);
-            volumeSlider.addEventListener('input', setVolume);
-            
-            // Initialize volume
-            audio.volume = volumeSlider.value;
-            
-            // Initialize first lyric as active
-            lyricLines[0].classList.add('active');
-        });
-    </script>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Hello, I'm <span class="highlight">James Villasor</span></h1>
+                <p class="hero-subtitle">Network Engineer, Full Stack Developer & Arduino Specialist</p>
+                <p class="hero-description">Specializing in Networking Configuration, Web Development, App Development, and Arduino IoT Projects</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Contact Me</a>
+                    <a href="#resume" class="btn btn-secondary">View Resume</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-image">
+                    <img src="profile.jpg" alt="Profile Picture">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="section profile-section">
+        <div class="container">
+            <h2 class="section-title">My Profile</h2>
+            <div class="profile-content">
+                <div class="profile-text">
+                    <h3>About Me</h3>
+                    <p>I am a passionate technology professional with expertise in networking configuration, web development, app development, and Arduino-based IoT solutions. With 2+ years of experience in the IT industry, I deliver efficient and scalable solutions for modern business challenges.</p>
+                    <p>My approach combines technical knowledge with creative problem-solving to build robust systems and applications that drive business success.</p>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <i class="fas fa-user"></i>
+                            <div>
+                                <h4>Name</h4>
+                                <p>James Aquino Villasor</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>villasorjames45@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Rizal Kapatagan Digos City</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>5+</h3>
+                        <p>Networks Configured</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>3+</h3>
+                        <p>Web Projects</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-microchip"></i>
+                        <h3>8+</h3>
+                        <p>Arduino Projects</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills-section">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-container">
+                <!-- Networking Configuration Skills -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>Networking Configuration</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Network Design & Architecture</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%;" data-skill="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Firewall Configuration</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%;" data-skill="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Isp Setup & Management</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%;" data-skill="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>PPPoE Server</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 92%;" data-skill="92"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Development Skills -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Web Development</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>HTML/CSS/JavaScript</span>
+                                <span>98%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 98%;" data-skill="98"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Php</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%;" data-skill="90"></div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Database Management</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%;" data-skill="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Development Skills -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>App Development</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Dart</span>
+                                <span>87%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 87%;" data-skill="87"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Flutter</span>
+                                <span>82%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 82%;" data-skill="82"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Java</span>
+                                <span>83%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 83%;" data-skill="83"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arduino & IoT Skills -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-microchip"></i>
+                        <h3>Arduino & IoT Projects</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>C++ Programming</span>
+                                <span>97%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 97%;" data-skill="97"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>IoT Systems</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%;" data-skill="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Sensor Integration</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 92%;" data-skill="92"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resume Section -->
+    <section id="resume" class="section resume-section">
+        <div class="container">
+            <h2 class="section-title">My Resume</h2>
+            <div class="resume-content">
+                <div class="resume-download">
+                    <div class="download-card">
+                        <i class="fas fa-file-download"></i>
+                        <h3>Download Resume</h3>
+                        <p>Get a PDF copy of my complete resume</p>
+                        <a href="#" class="btn btn-primary" id="downloadBtn">Download PDF</a>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Feel free to reach out for collaborations or just to say hello!</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>villasorjames45@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+63 9752666543</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Kapatagan Digos City</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
