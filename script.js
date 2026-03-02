@@ -145,3 +145,75 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(typeWriter, 500);
     }
 });
+
+
+// Simple Lightbox Preview
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('previewModal');
+    const closeBtn = document.querySelector('.close');
+    const modalBody = document.getElementById('modalBody');
+
+    // Get all lightbox links
+    const lightboxLinks = document.querySelectorAll('[data-lightbox]');
+    
+    lightboxLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const href = this.getAttribute('href');
+            const type = this.getAttribute('data-type') || 'image';
+            
+            modalBody.innerHTML = '';
+            
+            if (type === 'video') {
+                const video = document.createElement('video');
+                video.controls = true;
+                video.autoplay = true;
+                video.style.width = '100%';
+                video.style.height = 'auto';
+                video.style.maxHeight = '90vh';
+                
+                const source = document.createElement('source');
+                source.src = href;
+                source.type = 'video/mp4';
+                video.appendChild(source);
+                
+                modalBody.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = href;
+                img.style.width = '100%';
+                img.style.height = 'auto';
+                img.style.maxHeight = '90vh';
+                
+                modalBody.appendChild(img);
+            }
+            
+            modal.style.display = 'block';
+        });
+    });
+
+    // Close button
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            modalBody.innerHTML = '';
+        });
+    }
+
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            modalBody.innerHTML = '';
+        }
+    });
+
+    // Escape key to close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+            modalBody.innerHTML = '';
+        }
+    });
+});

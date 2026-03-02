@@ -340,6 +340,180 @@ img {
     color: var(--gray-color);
 }
 
+/* Skills Showcase Section */
+.skills-showcase-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 80px 0;
+}
+
+.skills-showcase-section .section-title {
+    color: white;
+}
+
+.skills-showcase-section .section-title::after {
+    background-color: white;
+}
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.showcase-card {
+    background-color: white;
+    padding: 0;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.showcase-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.showcase-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.image-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-size: 3rem;
+    color: white;
+}
+
+.showcase-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.showcase-images-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+    height: 250px;
+}
+
+.showcase-video {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.showcase-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.showcase-card:hover .showcase-image img {
+    transform: scale(1.1);
+}
+
+.showcase-image,
+.showcase-video {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.showcase-image:hover,
+.showcase-video:hover {
+    opacity: 0.9;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+#modalBody {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+#modalBody img,
+#modalBody video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.close {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+}
+
+.showcase-card h3 {
+    font-size: 1.4rem;
+    margin: 20px 20px 10px;
+    color: var(--dark-color);
+}
+
+.showcase-card p {
+    color: var(--gray-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 20px 20px;
+}
+
 /* Skills Section */
 .skills-section {
     background-color: #f8fafc;
