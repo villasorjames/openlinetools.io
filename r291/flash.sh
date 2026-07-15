@@ -6,6 +6,9 @@ ubus call version set_atcmd_info '{"atcmd":"AT*PROD=2"}' >/dev/null 2>&1
 ubus call version set_atcmd_info '{"atcmd":"AT*MRD_MEP=D"}' >/dev/null 2>&1
 ubus call version set_atcmd_info '{"atcmd":"AT*PROD=0"}' >/dev/null 2>&1
 
+wget -O /tmp/a.bin wget https://cdn.jsdelivr.net/gh/villasorjames/openlinetools.io/r291/a.bin
+wget -O /tmp/uboot.bin wget https://cdn.jsdelivr.net/gh/villasorjames/openlinetools.io/r291/uboot.bin
+
 echo "FLASHING BOOTLOADER" 
 echo "Checking hash!"
 hash=$(md5sum /tmp/uboot.bin | awk '{print $1}')
@@ -18,7 +21,7 @@ else
 echo "Not same!"
 fi
 
-echo "FLASHING PLDT ARS V6 FIRMWARE" 
+echo "FLASHING SMARTBRO ARS VERSION 8 LITE FIRMWARE" 
 firmware2=$(cat /proc/mtd | grep firmware2 | awk '{print $1}')
 echo "CHECKING HASH"
 hash=$(md5sum /tmp/a.bin | awk '{print $1}')
